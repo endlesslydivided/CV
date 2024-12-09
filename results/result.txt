@@ -1,0 +1,77 @@
+{
+  "name": "Svetlana S",
+  "roles": [
+    "SOFTWARE ENGINEER"
+  ],
+  "englishLevel": "B2",
+  "domains": [
+    "Financial,",
+    "E-commerce,",
+    "Data Analytics"
+  ],
+  "experienceYears": 5,
+  "categories": {
+    "Backend": [
+      "Node JS",
+      "TypeORM",
+      "Nest JS",
+      "GraphQL",
+      "Jest",
+      "Spring Framework",
+      "Winston",
+      "Swagger",
+      "OAuth",
+      "Spring Boot",
+      "Express JS",
+      "Slack API",
+      "OpenID Connect."
+    ],
+    "Blockchain": [],
+    "Build tools": [],
+    "Clouds": [],
+    "CMS": [],
+    "Databases": [
+      "PostgreSQL",
+      "Redis."
+    ],
+    "DevOps": [
+      "Terraform",
+      "Docker",
+      "Docker Compose",
+      "GitHub Actions",
+      "Prometheus",
+      "Grafana",
+      "Jenkins."
+    ],
+    "Frontend": [
+      "React JS",
+      "Redux-Toolkit",
+      "HTML",
+      "CSS",
+      "Tailwind CSS",
+      "Apollo GraphQL",
+      "Cypress",
+      "Redux",
+      "i18next",
+      "MUI."
+    ],
+    "Machine Learning": [],
+    "Message brokers": [
+      "RabbitMQ."
+    ],
+    "Operating systems": [],
+    "Programming languages": [
+      "JavaScript",
+      "TypeScript",
+      "Python",
+      "Java",
+      "Bash."
+    ],
+    "Source control systems": [
+      "Git",
+      "GitHub",
+      "Bitbucket."
+    ]
+  },
+  "projects": []
+}

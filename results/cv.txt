@@ -1,0 +1,262 @@
+Svetlana S.
+SOFTWARE ENGINEER
+
+Education
+Computer Science and Software Engineering
+Language proficiency
+English — B2
+Domains
+Financial,
+E-commerce,
+Data Analytics
+Software Engineer with 5+ years of experience. 
+As a full-stack developer with over 5 years of experience, I excel in building scalable web applications with expertise in both backend and frontend technologies. I thrive in collaborative environments, eager to share my insights with teammates.
+Programming languages
+JavaScript, TypeScript, Python, Java, Bash.
+Backend
+Node JS, TypeORM, Nest JS, GraphQL, Jest, Spring Framework, Winston, Swagger, OAuth, Spring Boot, Express JS, Slack API, OpenID Connect.
+Frontend
+React JS, Redux-Toolkit, HTML, CSS, Tailwind CSS, Apollo GraphQL, Cypress, Redux, i18next, MUI.
+Message brokers
+RabbitMQ.
+Databases
+PostgreSQL, Redis.
+Cloud
+AWS(S3, Lambda, IAM, VPC, Route 53, DynamoDB, CloudFront, EC2, ECS, RDS, API Gateway, SQS, CloudWatch, SES), GCP(GCS, GKE, GCR, GCE, Cloud Monitoring).
+DevOps
+Terraform, Docker, Docker Compose, GitHub Actions, Prometheus, Grafana, Jenkins.
+Source control systems
+Git, GitHub, Bitbucket.
+
+
+Projects
+
+
+AUCTION E-COMMERCE PLATFORM
+The internet e-commerce platform provides technology services to connect buyers and sellers through an online auction platform. Users can place lots with one or more items and specify a price for the whole lot or for every item in it.
+
+
+Project roles
+Software Engineer
+Period
+04.2022 - Till now
+Responsibilities & achievements
+Full Stack development;
+Designed microservices architecture for application;
+Managed and configured instances according to master-slave pattern;
+Implemented GraphQL based API Gateway and integrated Apollo Client to fetch and manage data from GraphQL APIs;
+Developed interactive and dynamic user interfaces using React JS;
+Configured function triggers using AWS Lambda;
+Managed user identities, service accounts, and permissions using AWS IAM;
+Implemented a set of API tests;
+Integrated GitHub Actions for CI/CD;
+Implemented custom rate limiting and IP whitelisting solutions for API;
+Utilized Terraform to automate the provisioning of all necessary AWS resources;
+Wrote unit and integration tests.
+Environment
+JavaScript, TypeScript, Node JS, TypeORM, Nest JS, GraphQL, Jest, React JS, Redux-Toolkit, HTML, CSS, Tailwind CSS, Apollo GraphQL, Cypress, RabbitMQ, PostgreSQL, AWS(S3, Lambda, IAM, VPC, Route 53, DynamoDB, CloudFront, VPC), Terraform, Docker, Docker Compose, GitHub Actions, Git, GitHub
+
+
+
+FINANCIAL PLATFORM
+Billing system for providers of digital services that allows to keep and to control financial and technical information, as well as equipment information. The project is an automated system for recording, processing and analyzing information about financial transactions, as well as automated construction of financial reports for a certain period of time to track dynamics.
+
+
+
+Project roles
+Software Engineer
+Period
+03.2020 - 04.2022
+Responsibilities & achievements
+Full Stack development;
+Developed REST API using Nest JS;
+Implemented user authentication with OAuth;
+Developed client application with React JS;
+Participated in development process within Agile methodology;
+Created authentication microservice using Spring Framework;
+Set up custom endpoints to connect AWS API Gateway with AWS Lambda functions;
+Created and managed public and private subnets within the AWS VPC;
+Created Python scripts to schedule the generation of financial reports, automatically distributing these reports to stakeholders via AWS SES;
+Applied static analysis tools to identify vulnerabilities in the application code before deployment;
+Created API documentation using Swagger;
+Configured Prometheus to collect detailed metrics related to the platform’s performance;
+Created Docker configuration files for local deployment and testing purposes.
+Environment
+JavaScript, TypeScript, Python, Java, Spring Framework, Node JS, Nest JS, TypeORM, Winston, Jest, Swagger, OAuth, React JS, Redux-Toolkit, Terraform, Tailwind CSS, HTML, CSS, Cypress, PostgreSQL, AWS(S3, EC2, Lambda, ECS, RDS, API Gateway, IAM, VPC, Route 53, SQS, CloudWatch, SES), Docker, Docker Compose, GitHub Actions, Prometheus, Grafana, Git, GitHub
+
+
+
+CALL ANALYTICS PLATFORM
+The platform is an intelligent Zoom recorder designed to provide detailed call analytics, generate summaries of discussed topics, and offer comprehensive information about meetings, ensuring you stay informed even when you cannot attend.
+Project roles
+Software Engineer
+Period
+04.2019 - 03.2020
+Responsibilities & achievements
+Full Stack development;
+Developed REST APIs using Express JS;
+Modified already existed Java based microservices;
+Implemented PostgreSQL database and created custom stored procedures;
+Utilized RabbitMQ as a message broker to set up communication between Spring Framework and Express JS based microservices;
+Implemented internalization with i18next;
+Integrated Slack's extensive API features for custom workflows and notifications;
+Utilized Redis for caching and session management in distributed applications;
+Created Bash scripts to automate interactions with external APIs;
+Integrated OpenID Connect (OIDC) to manage secure user authentication;
+Set up CI/CD pipelines with Jenkins for deployment within GCP GCE environment;
+Developed unit and integration tests with Jest;
+Participated in architecture discussions and planning sessions.
+Environment
+JavaScript, TypeScript, Java, Bash, Spring Framework, Spring Boot, Node JS, Express JS, Slack API, OpenID Connect, TypeORM, Jest, React JS, Redux, i18next, MUI, CSS, HTML, RabbitMQ, PostgreSQL, Redis, GCP(GCS, GKE, GCR, GCE, Cloud Monitoring), Docker, Docker Compose, Jenkins, Git, Bitbucket
+
+
+
+
+
+Professional skills
+
+SKILLS
+EXPERIENCE IN YEARS
+LAST USED
+Programming languages
+JavaScript
+TypeScript
+Python
+Java
+Bash
+5
+5
+2
+3
+1
+2024
+2024
+2022
+2022
+2020
+
+Backend
+Node JS
+TypeORM
+Nest JS
+GraphQL
+Jest
+Spring Framework
+Winston
+Swagger
+OAuth
+Spring Boot
+Express JS
+Slack API
+OpenID Connect
+5
+5
+4
+2
+5
+3
+2
+2
+2
+1
+1
+1
+1
+2024
+2024
+2024
+2024
+2024
+2022
+2022
+2022
+2022
+2020
+2020
+2020
+2020
+
+Frontend
+React JS
+Redux-Toolkit
+HTML
+CSS
+Tailwind CSS
+Apollo GraphQL
+Cypress
+Redux
+i18next
+MUI
+5
+4
+5
+5
+4
+2
+4
+1
+1
+1
+2024
+2024
+2024
+2024
+2024
+2024
+2024
+2020
+2020
+2020
+Message brokers
+RabbitMQ
+3
+2024
+Cloud
+AWS
+GCP
+4
+1
+2024
+2020
+DevOps
+Terraform
+Docker
+Docker Compose
+GitHub Actions
+Prometheus
+Grafana
+Jenkins
+4
+5
+5
+4
+2
+2
+1
+2024
+2024
+2024
+2024
+2022
+2022
+2020
+Databases
+PostgreSQL
+Redis
+5
+1
+2024
+2020
+Source control systems
+Git
+GitHub
+Bitbucket
+5
+4
+1
+2024
+2024
+2020
+
+
+
