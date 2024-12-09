@@ -1,8 +1,9 @@
 import { parseCVText } from "./parse/cv.parser";
-import * as fs from 'fs'; 
-import * as path from 'path'; 
+import * as fs from 'fs';
+import * as path from 'path';
+import { findMatches, findTechnologies } from "./parse/requirements.parser";
 
-const staticDir = path.join(__dirname, '..', 'results');  // Статические файлы в папке 'public'
+const resultsDir = path.join(__dirname, '..', 'results');
 
 const readFile = (filePath: string): string => {
   try {
@@ -15,17 +16,30 @@ const readFile = (filePath: string): string => {
 };
 
 const main = () => {
-  const filePath = path.join(staticDir, 'cv.txt');
-  const cvText = readFile(filePath);
+  const cvFilePath = path.join(resultsDir, 'cv.txt');
+  const cvRequirementsPath = path.join(resultsDir, 'requirements.txt');
+  const cvText = readFile(cvFilePath);
+  const requirementsText = readFile(cvRequirementsPath);
 
   if (cvText) {
     const parsedCV = parseCVText(cvText);
 
     console.log(JSON.stringify(parsedCV, null, 2));
 
-    fs.writeFileSync(path.join(staticDir, 'result.txt'),JSON.stringify(parsedCV, null, 2));
+    fs.writeFileSync(path.join(resultsDir, 'result.txt'), JSON.stringify(parsedCV, null, 2));
   } else {
-    console.error('Не удалось прочитать текст из файла.');
+    console.error('Не удалось прочитать текст из файла CV.');
+  }
+
+  if (requirementsText) {
+    const parsedRequirementsTechs = findTechnologies(requirementsText);
+    const parsedRequirementsKeywords = findMatches(requirementsText);
+
+    console.log(parsedRequirementsTechs);
+    console.log(parsedRequirementsKeywords);
+
+  } else {
+    console.error('Не удалось прочитать текст из файла Requirements.');
   }
 };
 

@@ -5,6 +5,7 @@ export interface Project {
   period: { start: string; end: string; duration: number };
   responsibilities: string[];
   environment: string[];
+  environmentUnparsed: string;
 }
 
 export type CVData = {
@@ -30,3 +31,9 @@ export type CVData = {
   };
   projects: Project[];
 };
+
+export interface Technologies {
+  [category: string]: string[];
+}
+
+export type Keywords = string[];

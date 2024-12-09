@@ -1,0 +1,29 @@
+
+Локация СТРОГО EU (РБ с VPN не рассматриваем).
+
+Мы в поиске senior  Fullstack (React+Node) - упор больше на FE
+
+Проект: NDA
+Клиент: Finland
+Длительность: full-time, 3 + месяца
+Старт: January (possible December)
+
+Требования:
+Английский: В2 и выше
+Key Requirements:
+– Develop and manage React components, ensuring efficient data flow between them.
+– Utilize hooks (built-in and custom) effectively, adhering to best practices.
+– Consume and handle APIs with proficiency using fetch, promises, and async/await.
+– Write clean, readable code using ES6+ syntax.
+– Implement and style components using advanced CSS skills, including CSS-in-JS solutions (e.g., Emotion or Styled-Components).
+– Debug React components and proactively solve issues using appropriate resources.
+– Hands-on experience with GraphQL for querying and managing data.
+– Knowledge of TypeScript and its application in React projects.
+– Experience with Node.js backend, including Server-Side Rendering (SSR).
+Additional Requirements/ Very Big Pluses:
+– Experience with public cloud platforms like Azure, AWS, or GCP.
+– Familiarity with Git, including workflows involving pull requests and peer code reviews.
+– Understanding of CSS custom properties (variables) and their inheritance rules.
+– Experience working with Contentful CMS or other content management systems.
+– Background in eCommerce platforms, especially Shopify.
+– Experience with email template styling, including proofing for various email clients and using templating languages like Handlebars or Pug.

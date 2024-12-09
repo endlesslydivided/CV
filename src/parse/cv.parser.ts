@@ -1,5 +1,23 @@
 import { CVData, Project } from "./model";
 
+const TILL_NOW = ['till now', 'Till now']
+
+const CATEGORIES = [
+  "Backend", "Blockchain", "Build Tools", "Clouds", "CMS", "Databases", "DevOps",
+  "Frontend", "Machine Learning", "Message brokers", "Operating Systems",
+  "Programming languages", "Source control systems"
+];
+
+const initialProject: Project = {
+  name: '',
+  description: '',
+  roles: [],
+  period: { start: '', end: '', duration: 0 },
+  responsibilities: [],
+  environmentUnparsed: '',
+  environment: []
+};
+
 export const parseCVText = (text: string): CVData => {
   const cvData: CVData = {
     name: "",
@@ -48,13 +66,8 @@ export const parseCVText = (text: string): CVData => {
     cvData.experienceYears = parseInt(experienceMatch[1]);
   }
 
-  const categories = [
-    "Backend", "Blockchain", "Build Tools", "Clouds", "CMS", "Databases", "DevOps",
-    "Frontend", "Machine Learning", "Message brokers", "Operating Systems",
-    "Programming languages", "Source control systems"
-  ];
 
-  categories.forEach((category) => {
+  CATEGORIES.forEach((category) => {
     const regex = new RegExp(`${category}\\s([\\s\\S]+?)(?=\\n\\w+)`);
     const match = text.match(regex);
     if (match) {
@@ -80,28 +93,14 @@ function parseProjects(text: string): Project[] {
 
   const lines = projectsText.split('\r\n');
 
-  console.log('lines', lines)
-
   const projects: Project[] = [];
-
-  let currentProject: Project = {
-    name: '',
-    description: '',
-    roles: [],
-    period: { start: '', end: '', duration: 0 },
-    responsibilities: [],
-    environment: []
-  };
-
-  let inResponsibilities = false;
-  let inEnvironment = false;
 
   const calculateDuration = (startDate: string, endDate: string) => {
     const start = new Date(startDate);
     let end = new Date(endDate);
 
 
-    if (endDate === "Till now") {
+    if (TILL_NOW.some(value => value === endDate)) {
       end = new Date();
     }
 
@@ -110,78 +109,73 @@ function parseProjects(text: string): Project[] {
     return diffMonths;
   }
 
-  lines.forEach(line => {
+  let currentProject: Project = { ...initialProject };
 
-    if (line.trim() === '') return;
+  const sections = {
+    projectRoles: 'Project roles',
+    period: 'Period',
+    resps: 'Responsibilities & achievements',
+    env: 'Environment'
+  }
 
+  let isNextDescription = false;
+  let isRespsList = false;
 
-    if (!currentProject && line !== "Projects") {
-      currentProject = {
-        name: line.trim(),
-        description: '',
-        roles: [],
-        period: { start: '', end: '', duration: 0 },
-        responsibilities: [],
-        environment: []
-      };
-      return;
-    }
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
 
+    if (line.trim() === '') {
+      isNextDescription = false;
+      continue;
+    };
 
-    if (currentProject && !currentProject.description) {
-      currentProject.description = line.trim();
-      return;
-    }
+    if (isRespsList) {
 
-
-    if (line.includes("Project roles")) {
-      const roles = line.replace('Project roles', '').trim();
-      currentProject.roles = roles.split('/').map(role => role.trim());
-      return;
-    }
-
-
-    if (line.includes("Period")) {
-      const periodStr = line.replace('Period', '').trim();
-      const [start, end] = periodStr.split('-').map(p => p.trim());
-      currentProject.period.start = start;
-      currentProject.period.end = end;
-      currentProject.period.duration = calculateDuration(start, end);
-      return;
-    }
-
-
-    if (line.includes("Responsibilities & achievements")) {
-      inResponsibilities = true;
-      return;
-    }
-
-    if (inResponsibilities) {
-      if (line.includes("Environment")) {
-        inResponsibilities = false;
-        inEnvironment = true;
-        return;
-      }
-      currentProject.responsibilities.push(line.trim());
-      return;
-    }
-
-
-    if (inEnvironment) {
-      currentProject.environment.push(line.trim());
-      return;
-    }
-
-
-    if (line.includes("Professional skills")) {
-      if (currentProject) {
+      if (line === sections.env) {
+        isRespsList = false;
+        const envs = lines[++i];
+        currentProject.environment = envs.split(', ');
+        currentProject.environmentUnparsed = envs;
         projects.push(currentProject);
+        currentProject = { ...initialProject };
+        continue;
       }
-      return;
+      currentProject.responsibilities.push(line);
+      continue;
     }
-  });
 
-  console.log(projects);
+    if (isNextDescription) {
+      currentProject.description += line;
+      continue;
+    }
+
+    if (line.toUpperCase() === line) {
+      currentProject.name = line;
+      isNextDescription = true;
+      continue;
+    }
+
+    switch (line) {
+      case sections.projectRoles: {
+        const roles = lines[++i];
+        currentProject.roles = roles.split('/').map(role => role.trim());
+        continue;
+      }
+      case sections.period: {
+        const periodStr = lines[++i];
+        const [start, end] = periodStr.split('-').map(p => p.trim());
+        currentProject.period.start = start;
+        currentProject.period.end = end;
+        currentProject.period.duration = calculateDuration(start, end);
+        continue;
+      }
+      case sections.resps: {
+        isRespsList = true;
+        continue;
+      }
+    }
+
+  }
 
   return projects;
 }
