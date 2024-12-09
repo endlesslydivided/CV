@@ -30,7 +30,6 @@ export const findTechnologies = (text: string): { [category: string]: string[] }
 
 	Object.keys(technologies).forEach(category => {
 		const categoryMatches: string[] = [];
-		
 		technologies[category].forEach(tech => {
 			console.log(tech);
 			const regex = new RegExp('\\b' + escapeRegExp(tech) + '\\b', 'gi');
