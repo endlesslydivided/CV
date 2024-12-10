@@ -118,14 +118,13 @@ function parseProjects(text: string): Project[] {
 
   let isNextDescription = false;
   let isRespsList = false;
-  let isNewProject = false;
 
-  let currentProject: Project = { ...initialProject };
+  let currentProject: Project = Object.assign({}, initialProject);
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    if (line.toUpperCase() === line) {
+    if (line && line.toUpperCase() === line) {
       currentProject.name = line;
       isNextDescription = true;
       continue;
@@ -133,6 +132,8 @@ function parseProjects(text: string): Project[] {
 
     if (line.trim() === 'Project roles') {
       isNextDescription = false;
+      const roles = lines[++i];
+      currentProject.roles = roles.split('/').map(role => role.trim());
       continue;
     };
 
@@ -143,11 +144,14 @@ function parseProjects(text: string): Project[] {
         const envs = lines[++i];
         currentProject.environment = envs.split(', ');
         currentProject.environmentUnparsed = envs;
-        projects.push(currentProject);
-        currentProject = { ...initialProject };
+        const copiedProject = JSON.parse(JSON.stringify(currentProject));
+        projects.push(copiedProject);
+        currentProject = Object.assign({}, initialProject);
         continue;
       }
-      currentProject.responsibilities.push(line);
+      if(line) {
+        currentProject.responsibilities = [...currentProject.responsibilities, line];
+      }
       continue;
     }
 
@@ -157,17 +161,14 @@ function parseProjects(text: string): Project[] {
     }
 
     switch (line) {
-      case sections.projectRoles: {
-        const roles = lines[++i];
-        currentProject.roles = roles.split('/').map(role => role.trim());
-        continue;
-      }
       case sections.period: {
         const periodStr = lines[++i];
         const [start, end] = periodStr.split('-').map(p => p.trim());
-        currentProject.period.start = start;
-        currentProject.period.end = end;
-        currentProject.period.duration = calculateDuration(start, end);
+        currentProject.period = {
+          start,
+          end,
+          duration: calculateDuration(start, end),
+        };
         continue;
       }
       case sections.resps: {

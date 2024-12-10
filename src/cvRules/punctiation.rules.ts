@@ -15,10 +15,10 @@ const checkSemicolumns = ({ cv, corrections }: ICheckPunctuationProps) => {
 
 	projects.forEach(project => {
 		const resps = project.responsibilities;
-		resps.forEach((str) => {
-			if (!str.endsWith(';')) {
+		resps.forEach((str,index) => {
+			if (!str.endsWith(';') && index !== resps.length - 1) {
 				corrections.projectCorrections[project.name].corrections.push(
-					`${str} - должна быть ; в конце`
+					`${str} - <span style='color:red'>должна быть ; в конце</span>`
 				)
 			}
 		});
@@ -27,7 +27,7 @@ const checkSemicolumns = ({ cv, corrections }: ICheckPunctuationProps) => {
 			const finalResp = resps[resps.length - 1];
 			if (!finalResp.endsWith('.')) {
 				corrections.projectCorrections[project.name].corrections.push(
-					`${finalResp} - должна быть . в конце`
+					`${finalResp} - <span style='color:red'> должна быть . в конце</span>`
 				)
 			}
 		}

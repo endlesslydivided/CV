@@ -41,18 +41,18 @@ Software Engineer
 Period
 04.2022 - Till now
 Responsibilities & achievements
-Full Stack development;
-Designed microservices architecture for application;
-Managed and configured instances according to master-slave pattern;
-Implemented GraphQL based API Gateway and integrated Apollo Client to fetch and manage data from GraphQL APIs;
-Developed interactive and dynamic user interfaces using React JS;
-Configured function triggers using AWS Lambda;
-Managed user identities, service accounts, and permissions using AWS IAM;
-Implemented a set of API tests;
-Integrated GitHub Actions for CI/CD;
-Implemented custom rate limiting and IP whitelisting solutions for API;
-Utilized Terraform to automate the provisioning of all necessary AWS resources;
-Wrote unit and integration tests.
+Full Stack development
+Designed microservices architecture for application
+Managed and configured instances according to master-slave pattern
+Implemented GraphQL based API Gateway and integrated Apollo Client to fetch and manage data from GraphQL APIs
+Developed interactive and dynamic user interfaces using React JS
+Configured function triggers using AWS Lambda
+Managed user identities, service accounts, and permissions using AWS IAM
+Implemented a set of API tests
+Integrated GitHub Actions for CI/CD
+Implemented custom rate limiting and IP whitelisting solutions for API
+Utilized Terraform to automate the provisioning of all necessary AWS resources
+Wrote unit and integration tests
 Environment
 JavaScript, TypeScript, Node JS, TypeORM, Nest JS, GraphQL, Jest, React JS, Redux-Toolkit, HTML, CSS, Tailwind CSS, Apollo GraphQL, Cypress, RabbitMQ, PostgreSQL, AWS(S3, Lambda, IAM, VPC, Route 53, DynamoDB, CloudFront, VPC), Terraform, Docker, Docker Compose, GitHub Actions, Git, GitHub
 
@@ -68,7 +68,7 @@ Software Engineer
 Period
 03.2020 - 04.2022
 Responsibilities & achievements
-Full Stack development;
+Full Stack development
 Developed REST API using Nest JS;
 Implemented user authentication with OAuth;
 Developed client application with React JS;
@@ -105,7 +105,9 @@ Created Bash scripts to automate interactions with external APIs;
 Integrated OpenID Connect (OIDC) to manage secure user authentication;
 Set up CI/CD pipelines with Jenkins for deployment within GCP GCE environment;
 Developed unit and integration tests with Jest;
-Participated in architecture discussions and planning sessions.
+Participated in architecture discussions and planning sessions;
+
+
 Environment
 JavaScript, TypeScript, Java, Bash, Spring Framework, Spring Boot, Node JS, Express JS, Slack API, OpenID Connect, TypeORM, Jest, React JS, Redux, i18next, MUI, CSS, HTML, RabbitMQ, PostgreSQL, Redis, GCP(GCS, GKE, GCR, GCE, Cloud Monitoring), Docker, Docker Compose, Jenkins, Git, Bitbucket
 

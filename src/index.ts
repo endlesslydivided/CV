@@ -4,6 +4,11 @@ import * as path from 'path';
 import { findMatches, findTechnologies } from "./parse/requirements.parser";
 import { beginCheck } from "./cvRules/root.rule";
 import { ICVCorrections } from "./cvRules/model";
+import util from 'util';
+import {spawn} from 'child_process';
+import {JSDOM} from 'jsdom';
+import {marked} from 'marked';
+import { copyWithFormatting } from "./copyToClipboard";
 
 const resultsDir = path.join(__dirname, '..', 'results');
 
@@ -48,8 +53,7 @@ const main = () => {
 
   if (parsedCV && techsKeywords && keywords) {
     cvCorrections = beginCheck({ cv: parsedCV, techsKeywords, keywords });
-
-    if (cvCorrections?.commonCorrections) {
+    if (cvCorrections?.commonCorrections.length) {
       result = '<b>Общие замечания</b>\n'
       cvCorrections?.commonCorrections.forEach((item) => {
         result += `- ${item};\n`
@@ -60,18 +64,21 @@ const main = () => {
       Object.keys(cvCorrections?.projectCorrections)?.forEach(item => {
         const projectCorrections = cvCorrections?.projectCorrections[item].corrections;
         if (projectCorrections.length > 0) {
-          result = `<b>${item}</b>\n`;
+          result += `<b>${item}</b>\n`;
           projectCorrections.forEach((item) => {
-            result += `- ${item};\n`
+            result += `- ${item}\n`
           })
+          result += `\n`;
         }
       });
 
     }
   }
-
+  const markdown = marked(result);
+  const dom = new JSDOM(`<!DOCTYPE html><html><body><div id="content">${markdown}</div></body></html>`);
+  const styledText = dom.window.document.documentElement.outerHTML;
+  copyWithFormatting(styledText)
   fs.writeFileSync(path.join(resultsDir, 'result.md'), result);
-
 };
 
 main();
