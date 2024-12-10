@@ -98,7 +98,7 @@ Developed REST APIs using Express JS;
 Modified already existed Java based microservices;
 Implemented PostgreSQL database and created custom stored procedures;
 Utilized RabbitMQ as a message broker to set up communication between Spring Framework and Express JS based microservices;
-Implemented internalization with i18next;
+Implemented internalization with i18next
 Integrated Slack's extensive API features for custom workflows and notifications;
 Utilized Redis for caching and session management in distributed applications;
 Created Bash scripts to automate interactions with external APIs;

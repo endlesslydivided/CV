@@ -24,14 +24,13 @@ const escapeRegExp = (string: string): string => {
 	return string.replace(/[.*+?^=!:#${}()|\[\]\/\\]/g, "\\$&");
 }
 
-export const findTechnologies = (text: string): { [category: string]: string[] } => {
+export const findTechnologies = (text: string): Technologies => {
 	const matches: { [category: string]: string[] } = {};
 
 
 	Object.keys(technologies).forEach(category => {
 		const categoryMatches: string[] = [];
 		technologies[category].forEach(tech => {
-			console.log(tech);
 			const regex = new RegExp('\\b' + escapeRegExp(tech) + '\\b', 'gi');
 			if (regex.test(text)) {
 				categoryMatches.push(tech);

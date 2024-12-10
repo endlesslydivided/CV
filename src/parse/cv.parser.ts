@@ -109,8 +109,6 @@ function parseProjects(text: string): Project[] {
     return diffMonths;
   }
 
-  let currentProject: Project = { ...initialProject };
-
   const sections = {
     projectRoles: 'Project roles',
     period: 'Period',
@@ -120,11 +118,20 @@ function parseProjects(text: string): Project[] {
 
   let isNextDescription = false;
   let isRespsList = false;
+  let isNewProject = false;
+
+  let currentProject: Project = { ...initialProject };
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    if (line.trim() === '') {
+    if (line.toUpperCase() === line) {
+      currentProject.name = line;
+      isNextDescription = true;
+      continue;
+    }
+
+    if (line.trim() === 'Project roles') {
       isNextDescription = false;
       continue;
     };
@@ -146,12 +153,6 @@ function parseProjects(text: string): Project[] {
 
     if (isNextDescription) {
       currentProject.description += line;
-      continue;
-    }
-
-    if (line.toUpperCase() === line) {
-      currentProject.name = line;
-      isNextDescription = true;
       continue;
     }
 
