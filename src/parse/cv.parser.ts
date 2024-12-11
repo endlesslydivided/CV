@@ -1,4 +1,8 @@
-import { CVData, Project } from "./model";
+import { escapeRegExp, flatten, flattenDeep, values } from 'lodash';
+import { CVData, IClouds, Project } from "./model";
+
+import { findTechnologies } from "./requirements.parser";
+import { unprefixedClouds } from './unprefixedCloud';
 
 const TILL_NOW = ['till now', 'Till now']
 
@@ -8,6 +12,8 @@ const CATEGORIES = [
   "Programming languages", "Source control systems"
 ];
 
+const CLOUD_PLATFORMS = ["AWS","Azure","GCP","Heroku","DigitalOcean","Salesforce"]
+
 const initialProject: Project = {
   name: '',
   description: '',
@@ -15,6 +21,11 @@ const initialProject: Project = {
   period: { start: '', end: '', duration: 0 },
   responsibilities: [],
   environmentUnparsed: '',
+  techsFromResps:[],
+  clouds:{
+    envs: [],
+    reps: [],
+  },
   environment: []
 };
 
@@ -65,7 +76,6 @@ export const parseCVText = (text: string): CVData => {
   if (experienceMatch) {
     cvData.experienceYears = parseInt(experienceMatch[1]);
   }
-
 
   CATEGORIES.forEach((category) => {
     const regex = new RegExp(`${category}\\s([\\s\\S]+?)(?=\\n\\w+)`);
@@ -144,12 +154,50 @@ function parseProjects(text: string): Project[] {
         const envs = lines[++i];
         currentProject.environment = envs.split(', ');
         currentProject.environmentUnparsed = envs;
+        const cloudServiceEnvs = getCloudsFromEnvs(envs)
+        currentProject.clouds = {
+          ...currentProject.clouds,
+          envs: cloudServiceEnvs
+        }
         const copiedProject = JSON.parse(JSON.stringify(currentProject));
         projects.push(copiedProject);
         currentProject = Object.assign({}, initialProject);
         continue;
       }
       if(line) {
+        const foundTechs = findTechnologies(line);
+        const cloudsFromResp = foundTechs['Clouds'];
+        const techsFromResps = flattenDeep(values(foundTechs));
+
+        if(cloudsFromResp?.length > 0) {
+          const cloudsFromsRespWithPlatforms: IClouds[] = cloudsFromResp.map(item => {
+            const inputUpper = item.toUpperCase();
+            
+            for (const platform of CLOUD_PLATFORMS) {
+              const platformUpper = platform.toUpperCase();
+              
+              if (inputUpper.startsWith(platformUpper)) {
+                const service = item.slice(platform.length).trim();
+                
+                return {
+                  platform: platform,
+                  service: service.trim()
+                };
+              }
+            }
+            return {
+              platform: '',
+              service: item
+            }
+          })
+
+          currentProject.clouds = {
+            ...currentProject.clouds,
+            reps: [...currentProject.clouds.reps, ...cloudsFromsRespWithPlatforms]
+          }
+        }
+
+        currentProject.techsFromResps = [...currentProject.techsFromResps, ...techsFromResps];
         currentProject.responsibilities = [...currentProject.responsibilities, line];
       }
       continue;
@@ -180,4 +228,45 @@ function parseProjects(text: string): Project[] {
   }
 
   return projects;
+}
+
+
+const getCloudsFromEnvs = (envs: string) => {
+    // Регулярное выражение для поиска платформ и технологий в скобках
+    const pattern = /([A-Za-z0-9\s]+)\s*\(([^)]+)\)/g;
+  
+    // Массив для хранения результатов
+    const result: IClouds[] = [];
+    
+    // Ищем все совпадения с регулярным выражением
+    let match: RegExpExecArray | null;
+    
+    // Проходим по всем совпадениям
+    while ((match = pattern.exec(envs)) !== null) {
+      
+      const platform = match[1].trim();
+      
+      match[2].split(',').forEach(tech => {
+        result.push({
+          platform,
+          service: tech.trim(),
+        })
+      });
+      
+    }
+    
+    return result;
+}
+
+const findCloudns = (text: string) => {
+	const matches: string[] = [];
+
+	Object.keys(unprefixedClouds).forEach(cloud => {
+  	const regex = new RegExp('\\b' + escapeRegExp(cloud) + '\\b', 'gi');
+    if (regex.test(text)) {
+      matches.push(text);
+    }
+	});
+
+	return matches;
 }

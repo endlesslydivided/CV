@@ -1,9 +1,19 @@
+export interface IClouds {
+  platform: string;
+  service: string;
+}
+
 export interface Project {
   name: string;
   roles: string[];
   description: string;
   period: { start: string; end: string; duration: number };
   responsibilities: string[];
+  techsFromResps: string[];
+  clouds: {
+    reps: IClouds[];
+    envs: IClouds[];
+  };
   environment: string[];
   environmentUnparsed: string;
 }

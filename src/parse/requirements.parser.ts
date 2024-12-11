@@ -4,8 +4,8 @@ import path from 'path';
 
 const staticDir = path.join(__dirname, '..', '..', 'src', 'static');
 
-const technologies: Technologies = JSON.parse(fs.readFileSync(path.join(staticDir, 'technologies.json'), 'utf-8'));
-const keywords: Keywords = JSON.parse(fs.readFileSync(path.join(staticDir, 'keywords.json'), 'utf-8'));
+export const technologies: Technologies = JSON.parse(fs.readFileSync(path.join(staticDir, 'technologies.json'), 'utf-8'));
+export const keywords: Keywords = JSON.parse(fs.readFileSync(path.join(staticDir, 'keywords.json'), 'utf-8'));
 
 export const findMatches = (text: string): string[] => {
 	const matches: string[] = [];
@@ -20,7 +20,7 @@ export const findMatches = (text: string): string[] => {
 	return [...new Set(matches)];
 };
 
-const escapeRegExp = (string: string): string => {
+export const escapeRegExp = (string: string): string => {
 	return string.replace(/[.*+?^=!:#${}()|\[\]\/\\]/g, "\\$&");
 }
 
