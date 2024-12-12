@@ -32,6 +32,7 @@ const initialProject: Project = {
 export const parseCVText = (text: string): CVData => {
   const cvData: CVData = {
     name: "",
+    summary: "",
     roles: [],
     englishLevel: "",
     domains: [],
@@ -77,11 +78,23 @@ export const parseCVText = (text: string): CVData => {
     cvData.experienceYears = parseInt(experienceMatch[1]);
   }
 
+  const summaryMatch = text.match(/years of experience\.\s*(.*?)\s*Programming languages/);
+  if (summaryMatch) {
+    cvData.summary = summaryMatch[1];
+  }
+
+  const techsStart = text.indexOf('Programming languages');
+  const techsEnd = text.indexOf('Projects');
+
+  const techsText = text.slice(techsStart,techsEnd);
+
+  console.log('techsText',techsText);
+
   CATEGORIES.forEach((category) => {
-    const regex = new RegExp(`${category}\\s([\\s\\S]+?)(?=\\n\\w+)`);
-    const match = text.match(regex);
+    const regex = new RegExp(`${category}\\s([\\s\\S]+?)(?=\\n\\w+|\\n\\W)`);
+    const match = techsText.match(regex);
     if (match) {
-      const values = match[1].split(',').map((item) => item.trim());
+      const values = match[1].split(',').map((item) => (item.trim()).replace('.',''));
       cvData.categories[category as keyof typeof cvData.categories] = values;
     }
   });

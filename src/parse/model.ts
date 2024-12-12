@@ -20,6 +20,7 @@ export interface Project {
 
 export type CVData = {
   name: string;
+  summary: string,
   roles: string[];
   englishLevel: string;
   domains: string[];
