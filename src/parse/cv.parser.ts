@@ -43,7 +43,7 @@ const calculateDuration = (startDate: string, endDate: string) => {
 
   const diffMonths = (endDateObject.getFullYear() - startDateObject.getFullYear()) * 12
     + (endDateObject.getMonth() - startDateObject.getMonth());
-  return diffMonths;
+  return Number((diffMonths / 12).toFixed(2));
 }
 
 export const parseCVText = (text: string): CVData => {
@@ -103,15 +103,15 @@ export const parseCVText = (text: string): CVData => {
   const techsStart = text.indexOf('Programming languages');
   const techsEnd = text.indexOf('Projects');
 
-  const techsText = text.slice(techsStart,techsEnd);
+  const techsText = text.slice(techsStart, techsEnd);
 
-  console.log('techsText',techsText);
+  console.log('techsText', techsText);
 
   CATEGORIES.forEach((category) => {
     const regex = new RegExp(`${category}\\s([\\s\\S]+?)(?=\\n\\w+|\\n\\W)`);
     const match = techsText.match(regex);
     if (match) {
-      const values = match[1].split(',').map((item) => (item.trim()).replace('.',''));
+      const values = match[1].split(',').map((item) => (item.trim()).replace('.', ''));
       cvData.categories[category as keyof typeof cvData.categories] = values;
     }
   });

@@ -1,5 +1,6 @@
 {
   "name": "Svetlana S.",
+  "summary": "As a full-stack developer with over 5 years of experience, I excel in building scalable web applications with expertise in both backend and frontend technologies. I thrive in collaborative environments, eager to share my insights with teammates.",
   "roles": [
     "SOFTWARE ENGINEER"
   ],
@@ -24,7 +25,7 @@
       "Spring Boot",
       "Express JS",
       "Slack API",
-      "OpenID Connect."
+      "OpenID Connect"
     ],
     "Blockchain": [],
     "Build tools": [],
@@ -32,7 +33,7 @@
     "CMS": [],
     "Databases": [
       "PostgreSQL",
-      "Redis."
+      "Redis"
     ],
     "DevOps": [
       "Terraform",
@@ -41,7 +42,7 @@
       "GitHub Actions",
       "Prometheus",
       "Grafana",
-      "Jenkins."
+      "Jenkins"
     ],
     "Frontend": [
       "React JS",
@@ -53,11 +54,11 @@
       "Cypress",
       "Redux",
       "i18next",
-      "MUI."
+      "MUI"
     ],
     "Machine Learning": [],
     "Message brokers": [
-      "RabbitMQ."
+      "RabbitMQ"
     ],
     "Operating systems": [],
     "Programming languages": [
@@ -65,12 +66,12 @@
       "TypeScript",
       "Python",
       "Java",
-      "Bash."
+      "Bash"
     ],
     "Source control systems": [
       "Git",
       "GitHub",
-      "Bitbucket."
+      "Bitbucket"
     ]
   },
   "projects": [
@@ -83,7 +84,7 @@
       "period": {
         "start": "04.2022",
         "end": "Till now",
-        "duration": 32
+        "duration": 2.67
       },
       "responsibilities": [
         "Full Stack development",
@@ -197,7 +198,7 @@
       "period": {
         "start": "03.2020",
         "end": "04.2022",
-        "duration": 25
+        "duration": 2.08
       },
       "responsibilities": [
         "Full Stack development",
@@ -351,7 +352,7 @@
       "period": {
         "start": "04.2019",
         "end": "03.2020",
-        "duration": 11
+        "duration": 0.92
       },
       "responsibilities": [
         "Full Stack development;",
