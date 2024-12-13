@@ -12,7 +12,7 @@ const CATEGORIES = [
   "Programming languages", "Source control systems"
 ];
 
-const CLOUD_PLATFORMS = ["AWS","Azure","GCP","Heroku","DigitalOcean","Salesforce"]
+const CLOUD_PLATFORMS = ["AWS", "Azure", "GCP", "Heroku", "DigitalOcean", "Salesforce"]
 
 const initialProject: Project = {
   name: '',
@@ -21,13 +21,30 @@ const initialProject: Project = {
   period: { start: '', end: '', duration: 0 },
   responsibilities: [],
   environmentUnparsed: '',
-  techsFromResps:[],
-  clouds:{
+  techsFromResps: [],
+  clouds: {
     envs: [],
     reps: [],
   },
   environment: []
 };
+
+const calculateDuration = (startDate: string, endDate: string) => {
+  let endDateObject;;
+
+  if (TILL_NOW.some(value => value === endDate)) {
+    endDateObject = new Date();
+  } else {
+    const [monthEnd, yearEnd] = endDate.split('.'); // Разбиваем строку на месяц и год
+    endDateObject = new Date(Number(yearEnd), Number(monthEnd) - 1);
+  }
+  const [monthStart, yearStart] = startDate.split('.'); // Разбиваем строку на месяц и год
+  const startDateObject = new Date(Number(yearStart), Number(monthStart) - 1);
+
+  const diffMonths = (endDateObject.getFullYear() - startDateObject.getFullYear()) * 12
+    + (endDateObject.getMonth() - startDateObject.getMonth());
+  return diffMonths;
+}
 
 export const parseCVText = (text: string): CVData => {
   const cvData: CVData = {
@@ -54,7 +71,7 @@ export const parseCVText = (text: string): CVData => {
     projects: [],
   };
 
-  const nameMatch = text.match(/^([A-Za-z]+\s[A-Za-z]+)/);
+  const nameMatch = text.match(/^([A-Za-z]+\s[A-Za-z]+\.)/);
   if (nameMatch) cvData.name = nameMatch[0];
 
   const rolesMatch = text.match(/SOFTWARE ENGINEER|LEAD SOFTWARE ENGINEER|TECH LEAD|TEAM LEAD|ARCHITECTOR/g);
@@ -105,20 +122,6 @@ function parseProjects(text: string): Project[] {
 
   const projects: Project[] = [];
 
-  const calculateDuration = (startDate: string, endDate: string) => {
-    const start = new Date(startDate);
-    let end = new Date(endDate);
-
-
-    if (TILL_NOW.some(value => value === endDate)) {
-      end = new Date();
-    }
-
-
-    const diffMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-    return diffMonths;
-  }
-
   const sections = {
     projectRoles: 'Project roles',
     period: 'Period',
@@ -164,21 +167,21 @@ function parseProjects(text: string): Project[] {
         currentProject = Object.assign({}, initialProject);
         continue;
       }
-      if(line) {
+      if (line) {
         const foundTechs = findTechnologies(line);
         const cloudsFromResp = foundTechs['Clouds'];
         const techsFromResps = flattenDeep(values(foundTechs));
 
-        if(cloudsFromResp?.length > 0) {
+        if (cloudsFromResp?.length > 0) {
           const cloudsFromsRespWithPlatforms: IClouds[] = cloudsFromResp.map(item => {
             const inputUpper = item.toUpperCase();
-            
+
             for (const platform of CLOUD_PLATFORMS) {
               const platformUpper = platform.toUpperCase();
-              
+
               if (inputUpper.startsWith(platformUpper)) {
                 const service = item.slice(platform.length).trim();
-                
+
                 return {
                   platform: platform,
                   service: service.trim()
@@ -232,41 +235,41 @@ function parseProjects(text: string): Project[] {
 
 
 const getCloudsFromEnvs = (envs: string) => {
-    // Регулярное выражение для поиска платформ и технологий в скобках
-    const pattern = /([A-Za-z0-9\s]+)\s*\(([^)]+)\)/g;
-  
-    // Массив для хранения результатов
-    const result: IClouds[] = [];
-    
-    // Ищем все совпадения с регулярным выражением
-    let match: RegExpExecArray | null;
-    
-    // Проходим по всем совпадениям
-    while ((match = pattern.exec(envs)) !== null) {
-      
-      const platform = match[1].trim();
-      
-      match[2].split(',').forEach(tech => {
-        result.push({
-          platform,
-          service: tech.trim(),
-        })
-      });
-      
-    }
-    
-    return result;
+  // Регулярное выражение для поиска платформ и технологий в скобках
+  const pattern = /([A-Za-z0-9\s]+)\s*\(([^)]+)\)/g;
+
+  // Массив для хранения результатов
+  const result: IClouds[] = [];
+
+  // Ищем все совпадения с регулярным выражением
+  let match: RegExpExecArray | null;
+
+  // Проходим по всем совпадениям
+  while ((match = pattern.exec(envs)) !== null) {
+
+    const platform = match[1].trim();
+
+    match[2].split(',').forEach(tech => {
+      result.push({
+        platform,
+        service: tech.trim(),
+      })
+    });
+
+  }
+
+  return result;
 }
 
 const findCloudns = (text: string) => {
-	const matches: string[] = [];
+  const matches: string[] = [];
 
-	Object.keys(unprefixedClouds).forEach(cloud => {
-  	const regex = new RegExp('\\b' + escapeRegExp(cloud) + '\\b', 'gi');
+  Object.keys(unprefixedClouds).forEach(cloud => {
+    const regex = new RegExp('\\b' + escapeRegExp(cloud) + '\\b', 'gi');
     if (regex.test(text)) {
       matches.push(text);
     }
-	});
+  });
 
-	return matches;
+  return matches;
 }

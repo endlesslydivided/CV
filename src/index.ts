@@ -1,16 +1,15 @@
-import { parseCVText } from "./parse/cv.parser";
 import * as fs from 'fs';
+import { JSDOM } from 'jsdom';
+import { marked } from 'marked';
 import * as path from 'path';
-import { findMatches, findTechnologies } from "./parse/requirements.parser";
-import { beginCheck } from "./cvRules/root.rule";
-import { ICVCorrections } from "./cvRules/model";
-import util from 'util';
-import {spawn} from 'child_process';
-import {JSDOM} from 'jsdom';
-import {marked} from 'marked';
 import { copyWithFormatting } from "./copyToClipboard";
+import { ICVCorrections } from "./cvRules/model";
+import { beginCheck } from "./cvRules/root.rule";
+import { parseCVText } from "./parse/cv.parser";
+import { findMatches, findTechnologies } from "./parse/requirements.parser";
 
 const resultsDir = path.join(__dirname, '..', 'results');
+const logsDir = path.join(__dirname, '..', 'logs');
 
 const readFile = (filePath: string): string => {
   try {
@@ -79,6 +78,7 @@ const main = () => {
   const styledText = dom.window.document.documentElement.outerHTML;
   copyWithFormatting(styledText)
   fs.writeFileSync(path.join(resultsDir, 'result.md'), result);
+  fs.writeFileSync(path.join(logsDir, 'parsedCV.json'), JSON.stringify(parsedCV, null, 2));
 };
 
 main();
