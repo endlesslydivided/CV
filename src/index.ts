@@ -62,13 +62,15 @@ const main = () => {
     if (cvCorrections?.projectCorrections) {
       Object.keys(cvCorrections?.projectCorrections)?.forEach(item => {
         const projectCorrections = cvCorrections?.projectCorrections[item].corrections;
-        if (projectCorrections.length > 0) {
           result += `<b>${item}</b>\n`;
           projectCorrections.forEach((item) => {
             result += `- ${item}\n`
           })
+          if (projectCorrections.length === 0) {
+            result += `Нет замечаний\n`
+          }
           result += `\n`;
-        }
+        
       });
 
     }

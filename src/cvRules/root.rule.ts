@@ -1,4 +1,5 @@
 import { CVData, Technologies } from "../parse/model";
+import { checkJSSuffixeRules } from "./jsSuffix.rules";
 import { ICVCorrections } from "./model";
 import { checkPunctuation } from "./punctiation.rules";
 
@@ -27,6 +28,11 @@ export const beginCheck = (props: IBeginCheckProps) => {
 	})
 
 	checkPunctuation({
+		corrections,
+		cv
+	});
+
+	checkJSSuffixeRules({
 		corrections,
 		cv
 	})
