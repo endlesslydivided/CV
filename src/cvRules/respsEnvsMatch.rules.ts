@@ -27,8 +27,6 @@ const checkMatch = ({ cv, corrections }: ICheckRespsEnvsMatch) => {
 		})
 
 		regexpsRules.forEach((rule) => {
-			console.log('rule',rule)
-
 			if(!rule.regexp.test(unparsedEnv)) {
 				corrections.projectCorrections[project.name].corrections.push(
 					`<span style='color:red'>Добавить ${rule.value} в Environment</span>`
