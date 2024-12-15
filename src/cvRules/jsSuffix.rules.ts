@@ -104,7 +104,6 @@ const checkLostJSSuffix = ({ cv, corrections }: ICheckJSSuffix) => {
 					const alikeRegexp = Object.entries(ALIKE_TECHS)
 					.filter(item => item[1] === rule.key)
 					.map(item => new RegExp(`\\b${item[0]}\\b`,'i'));
-					console.log('alikeRegexp',alikeRegexp)
 					if(alikeRegexp.some(rule => rule.test(str))) {
 						return;
 					}
