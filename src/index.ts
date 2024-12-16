@@ -62,15 +62,15 @@ const main = () => {
     if (cvCorrections?.projectCorrections) {
       Object.keys(cvCorrections?.projectCorrections)?.forEach(item => {
         const projectCorrections = cvCorrections?.projectCorrections[item].corrections;
-          result += `<b>${item}</b>\n`;
-          projectCorrections.forEach((item) => {
-            result += `- ${item}\n`
-          })
-          if (projectCorrections.length === 0) {
-            result += `Нет замечаний\n`
-          }
-          result += `\n`;
-        
+        result += `<b>${item}</b>\n`;
+        projectCorrections.forEach((item) => {
+          result += `- ${item}\n`
+        })
+        if (projectCorrections.length === 0) {
+          result += `Нет замечаний\n`
+        }
+        result += `\n`;
+
       });
 
     }
@@ -85,7 +85,7 @@ const main = () => {
 
 const cvFilePath = path.join(resultsDir, 'cv.txt');
 
-const onFileChange = (event:fs.WatchEventType, filename: string) => {
+const onFileChange = (event: fs.WatchEventType, filename: string) => {
   if (event === 'change') {
     console.log(`Файл ${filename} был изменен`);
     main();
@@ -95,9 +95,10 @@ const onFileChange = (event:fs.WatchEventType, filename: string) => {
 
 fs.watch(cvFilePath, (event, filename) => {
   if (filename) {
-      onFileChange(event, filename);
+    onFileChange(event, filename);
   } else {
-      console.log('Имя файла недоступно');
+    console.log('Имя файла недоступно');
   }
 });
 
+main();

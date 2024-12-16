@@ -164,7 +164,6 @@ function parseProjects(text: string): Project[] {
     };
 
     if (isRespsList) {
-
       if (line === sections.env) {
         isRespsList = false;
         const envs = lines[++i];
@@ -223,11 +222,11 @@ function parseProjects(text: string): Project[] {
       currentProject.description += line;
       continue;
     }
-
-    switch (line) {
+    const trimmedLine = line.trim();
+    switch (trimmedLine) {
       case sections.period: {
         const periodStr = lines[++i];
-        const [start, end] = periodStr.split('-').map(p => p.trim());
+        const [start, end] = periodStr.split(/(\-|\–)/).map(p => p.trim());
         currentProject.period = {
           start,
           end,
