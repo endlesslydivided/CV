@@ -273,16 +273,3 @@ const getCloudsFromEnvs = (envs: string) => {
 
   return result;
 }
-
-const findCloudns = (text: string) => {
-  const matches: string[] = [];
-
-  Object.keys(unprefixedClouds).forEach(cloud => {
-    const regex = new RegExp('\\b' + escapeRegExp(cloud) + '\\b', 'gi');
-    if (regex.test(text)) {
-      matches.push(text);
-    }
-  });
-
-  return matches;
-}

@@ -31,7 +31,7 @@ export const findTechnologies = (text: string): Technologies => {
 	Object.keys(technologies).forEach(category => {
 		const categoryMatches: string[] = [];
 		technologies[category].forEach(tech => {
-			const regex = new RegExp('\\b' + escapeRegExp(tech) + '\\b', 'gi');
+			const regex = new RegExp(`\\b${escapeRegExp(tech)}\\b`, 'g');
 			if (regex.test(text)) {
 				categoryMatches.push(tech);
 			}

@@ -83,4 +83,21 @@ const main = () => {
   fs.writeFileSync(path.join(logsDir, 'parsedCV.json'), JSON.stringify(parsedCV, null, 2));
 };
 
-main();
+const cvFilePath = path.join(resultsDir, 'cv.txt');
+
+const onFileChange = (event:fs.WatchEventType, filename: string) => {
+  if (event === 'change') {
+    console.log(`Файл ${filename} был изменен`);
+    main();
+  }
+}
+
+
+fs.watch(cvFilePath, (event, filename) => {
+  if (filename) {
+      onFileChange(event, filename);
+  } else {
+      console.log('Имя файла недоступно');
+  }
+});
+

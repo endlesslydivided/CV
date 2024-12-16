@@ -13,6 +13,13 @@ const JS_LOST_SUFFIXES = {
 	"Web3 JS": "Web3",
 }
 
+const ALIKE_TECHS = {
+	"React-router-dom": "React JS",
+	"React Query": "React JS",
+	"Next Auth": "Next JS",
+	"i18next": "Next JS",
+}
+
 const JS_SUFFIXES = {
 	"Node JS": "Node.js",
 	"React JS": "React.js",
@@ -94,6 +101,12 @@ const checkLostJSSuffix = ({ cv, corrections }: ICheckJSSuffix) => {
 		resps.forEach((str,index) => {
 			regexpsRules.forEach((rule) => {
 				if(rule.regexp.test(str)) {
+					const alikeRegexp = Object.entries(ALIKE_TECHS)
+					.filter(item => item[1] === rule.key)
+					.map(item => new RegExp(`\\b${item[0]}\\b`,'i'));
+					if(alikeRegexp.some(rule => rule.test(str))) {
+						return;
+					}
 					corrections.projectCorrections[project.name].corrections.push(
 						`${str} - <span style='color:red'>добавить JS к ${rule.value}</span>`
 					)
